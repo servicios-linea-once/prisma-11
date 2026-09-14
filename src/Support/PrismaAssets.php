@@ -16,14 +16,24 @@ class PrismaAssets
     }
 
     /**
-     * Devuelve el contenido del script de Alpine Store.
+     * Devuelve el contenido combinado de scripts para Alpine.js y utilidades headless.
      */
     public static function storeScript(): string
     {
-        $filePath = self::basePath('resources/js/prisma-store.js');
-        if (file_exists($filePath)) {
-            return (string) file_get_contents($filePath);
+        $scripts = [
+            self::basePath('resources/js/prisma-store.js'),
+            self::basePath('resources/js/headless/floating-position.js'),
+            self::basePath('resources/js/headless/focus-trap.js'),
+            self::basePath('resources/js/headless/roving-tabindex.js'),
+        ];
+
+        $output = '';
+        foreach ($scripts as $script) {
+            if (file_exists($script)) {
+                $output .= (string) file_get_contents($script) . "\n";
+            }
         }
-        return '';
+
+        return $output;
     }
 }

@@ -79,6 +79,10 @@ class Avatar extends BaseComponent
 
     public function render(): View
     {
-        return view('prisma::components.avatar');
+        return view('prisma::components.avatar', [
+            'classes' => $this->classes(),
+            'initials' => $this->initials(),
+            'statusClasses' => $this->statusClasses(),
+        ]);
     }
 }

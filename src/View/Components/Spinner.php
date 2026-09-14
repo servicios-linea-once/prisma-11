@@ -43,6 +43,8 @@ class Spinner extends BaseComponent
 
     public function render(): View
     {
-        return view('prisma::components.spinner');
+        return view('prisma::components.spinner', [
+            'classes' => $this->classes(),
+        ]);
     }
 }

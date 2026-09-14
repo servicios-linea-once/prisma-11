@@ -69,6 +69,8 @@ class PrismaServiceProvider extends ServiceProvider
             'checkbox' => \ServicioLineaOnce\Prisma11\View\Components\Checkbox::class,
             'radio' => \ServicioLineaOnce\Prisma11\View\Components\Radio::class,
             'switch' => \ServicioLineaOnce\Prisma11\View\Components\SwitchToggle::class,
+            'alert' => \ServicioLineaOnce\Prisma11\View\Components\Alert::class,
+            'toast' => \ServicioLineaOnce\Prisma11\View\Components\Toast::class,
         ];
 
         foreach ($components as $alias => $class) {
@@ -78,13 +80,18 @@ class PrismaServiceProvider extends ServiceProvider
             }
         }
 
-        // Registro de componentes anónimos
+        // Registro de todas las vistas de componentes anónimos con prefijos configurados
         $componentsPath = __DIR__ . '/../resources/views/components';
         if (is_dir($componentsPath)) {
-            Blade::anonymousComponentPath($componentsPath, $prefix);
-
-            if ($prefix === 'prisma') {
-                Blade::anonymousComponentPath($componentsPath, 'p11');
+            $files = glob($componentsPath . '/*.blade.php') ?: [];
+            foreach ($files as $file) {
+                $name = basename($file, '.blade.php');
+                if (!isset($components[$name])) {
+                    Blade::component("prisma::components.{$name}", "{$prefix}-{$name}");
+                    if ($prefix === 'prisma') {
+                        Blade::component("prisma::components.{$name}", "p11-{$name}");
+                    }
+                }
             }
         }
     }

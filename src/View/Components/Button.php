@@ -57,6 +57,8 @@ class Button extends BaseComponent
 
     public function render(): View
     {
-        return view('prisma::components.button');
+        return view('prisma::components.button', [
+            'classes' => $this->classes(),
+        ]);
     }
 }

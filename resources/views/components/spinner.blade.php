@@ -1,5 +1,9 @@
+@props([
+    'classes' => '',
+])
+
 <svg
-    {{ $attributes->except('class')->merge(['class' => $classes()]) }}
+    {{ $attributes->except('class')->merge(['class' => $classes]) }}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"

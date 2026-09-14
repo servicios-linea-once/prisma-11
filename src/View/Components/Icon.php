@@ -44,6 +44,9 @@ class Icon extends BaseComponent
 
     public function render(): View
     {
-        return view('prisma::components.icon');
+        return view('prisma::components.icon', [
+            'classes' => $this->classes(),
+            'svgContent' => $this->svgContent(),
+        ]);
     }
 }

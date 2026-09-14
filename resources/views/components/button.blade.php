@@ -9,12 +9,13 @@
     'iconLeading' => null,
     'iconTrailing' => null,
     'href' => null,
+    'classes' => '',
 ])
 
 @php
     $finalClasses = $attributes->get('class')
-        ? $component->mergeClasses($classes(), $attributes->get('class'))
-        : $classes();
+        ? $component->mergeClasses($classes, $attributes->get('class'))
+        : $classes;
 @endphp
 
 @if ($as === 'a' || $href)
