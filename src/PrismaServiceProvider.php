@@ -58,15 +58,31 @@ class PrismaServiceProvider extends ServiceProvider
     {
         $prefix = (string) config('prisma.prefix', 'prisma');
 
-        // Registro de componentes con clase PHP
-        Blade::componentNamespace('ServicioLineaOnce\\Prisma11\\View\\Components', $prefix);
+        $components = [
+            'button' => \ServicioLineaOnce\Prisma11\View\Components\Button::class,
+            'badge' => \ServicioLineaOnce\Prisma11\View\Components\Badge::class,
+            'avatar' => \ServicioLineaOnce\Prisma11\View\Components\Avatar::class,
+            'spinner' => \ServicioLineaOnce\Prisma11\View\Components\Spinner::class,
+            'icon' => \ServicioLineaOnce\Prisma11\View\Components\Icon::class,
+            'input' => \ServicioLineaOnce\Prisma11\View\Components\Input::class,
+            'textarea' => \ServicioLineaOnce\Prisma11\View\Components\Textarea::class,
+            'checkbox' => \ServicioLineaOnce\Prisma11\View\Components\Checkbox::class,
+            'radio' => \ServicioLineaOnce\Prisma11\View\Components\Radio::class,
+            'switch' => \ServicioLineaOnce\Prisma11\View\Components\SwitchToggle::class,
+        ];
 
-        // Registro automático de componentes anónimos en resources/views/components
+        foreach ($components as $alias => $class) {
+            Blade::component($class, "{$prefix}-{$alias}");
+            if ($prefix === 'prisma') {
+                Blade::component($class, "p11-{$alias}");
+            }
+        }
+
+        // Registro de componentes anónimos
         $componentsPath = __DIR__ . '/../resources/views/components';
         if (is_dir($componentsPath)) {
             Blade::anonymousComponentPath($componentsPath, $prefix);
 
-            // Si el prefijo principal es 'prisma', también registrar alias 'p11' para conveniencia
             if ($prefix === 'prisma') {
                 Blade::anonymousComponentPath($componentsPath, 'p11');
             }
