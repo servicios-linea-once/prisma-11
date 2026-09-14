@@ -20,5 +20,18 @@ abstract class TestCase extends OrchestraTestCase
     {
         // Setup default configuration for tests
         $app['config']->set('app.key', 'base64:Hupx3yAyWxxx/zHoxxWOPxxZxxQx7xxVxx+x1xx5xx8=');
+
+        $workbenchViews = __DIR__ . '/../workbench/resources/views';
+        if (is_dir($workbenchViews)) {
+            $app['view']->addNamespace('workbench', $workbenchViews);
+        }
+    }
+
+    protected function defineRoutes($router): void
+    {
+        $routesFile = __DIR__ . '/../workbench/routes/web.php';
+        if (file_exists($routesFile)) {
+            require $routesFile;
+        }
     }
 }
