@@ -1,0 +1,44 @@
+@source "./vendor/servicio-linea-once/prisma-11/resources/views/**/*.blade.php";
+@source "./vendor/servicio-linea-once/prisma-11/src/**/*.php";
+
+@theme {
+  --color-primary: rgb(var(--p11-primary));
+  --color-primary-fg: rgb(var(--p11-primary-fg));
+  --color-primary-border: rgb(var(--p11-primary-border));
+  --color-primary-ring: rgb(var(--p11-primary-ring));
+
+  --color-secondary: rgb(var(--p11-secondary));
+  --color-secondary-fg: rgb(var(--p11-secondary-fg));
+  --color-secondary-border: rgb(var(--p11-secondary-border));
+  --color-secondary-ring: rgb(var(--p11-secondary-ring));
+
+  --color-success: rgb(var(--p11-success));
+  --color-success-fg: rgb(var(--p11-success-fg));
+  --color-success-border: rgb(var(--p11-success-border));
+  --color-success-ring: rgb(var(--p11-success-ring));
+
+  --color-danger: rgb(var(--p11-danger));
+  --color-danger-fg: rgb(var(--p11-danger-fg));
+  --color-danger-border: rgb(var(--p11-danger-border));
+  --color-danger-ring: rgb(var(--p11-danger-ring));
+
+  --color-warning: rgb(var(--p11-warning));
+  --color-warning-fg: rgb(var(--p11-warning-fg));
+  --color-warning-border: rgb(var(--p11-warning-border));
+  --color-warning-ring: rgb(var(--p11-warning-ring));
+
+  --color-info: rgb(var(--p11-info));
+  --color-info-fg: rgb(var(--p11-info-fg));
+  --color-info-border: rgb(var(--p11-info-border));
+  --color-info-ring: rgb(var(--p11-info-ring));
+
+  --color-light: rgb(var(--p11-light));
+  --color-light-fg: rgb(var(--p11-light-fg));
+  --color-light-border: rgb(var(--p11-light-border));
+  --color-light-ring: rgb(var(--p11-light-ring));
+
+  --color-dark: rgb(var(--p11-dark));
+  --color-dark-fg: rgb(var(--p11-dark-fg));
+  --color-dark-border: rgb(var(--p11-dark-border));
+  --color-dark-ring: rgb(var(--p11-dark-ring));
+}
