@@ -56,4 +56,10 @@ class TailwindClassMergeTest extends TestCase
         $result = TailwindClassMerge::merge('  font-bold   text-center ', 'font-normal');
         $this->assertEquals('font-normal text-center', $result);
     }
+
+    public function test_handles_null_and_empty_arguments(): void
+    {
+        $result = TailwindClassMerge::merge('bg-red-500', null, '', 'bg-blue-500', null);
+        $this->assertEquals('bg-blue-500', $result);
+    }
 }

@@ -16,9 +16,10 @@ class TailwindClassMerge
     /**
      * Fusiona clases de Tailwind resolviendo colisiones de especificidad.
      */
-    public static function merge(string ...$classLists): string
+    public static function merge(?string ...$classLists): string
     {
-        $raw = implode(' ', array_filter($classLists, fn(string $val) => trim($val) !== ''));
+        $filtered = array_filter($classLists, fn(?string $val) => $val !== null && trim($val) !== '');
+        $raw = implode(' ', $filtered);
         $raw = trim(preg_replace('/\s+/', ' ', $raw) ?? '');
 
         if ($raw === '') {
