@@ -13,3 +13,7 @@
     } catch (e) {}
 })();
 </script>
+
+<script id="prisma-store">
+{!! \ServicioLineaOnce\Prisma11\Support\PrismaAssets::storeScript() !!}
+</script>
