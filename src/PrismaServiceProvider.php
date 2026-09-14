@@ -56,7 +56,8 @@ class PrismaServiceProvider extends ServiceProvider
      */
     protected function registerBladeComponents(): void
     {
-        $prefix = (string) config('prisma.prefix', 'prisma');
+        $prefixVal = config('prisma.prefix');
+        $prefix = is_string($prefixVal) ? $prefixVal : 'prisma';
 
         $components = [
             'button' => \ServicioLineaOnce\Prisma11\View\Components\Button::class,

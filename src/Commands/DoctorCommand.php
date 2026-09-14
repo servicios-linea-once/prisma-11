@@ -115,8 +115,10 @@ class DoctorCommand extends Command
     {
         $configPath = config_path('prisma.php');
         if (file_exists($configPath)) {
-            $prefix = config('prisma.prefix', 'prisma');
-            $theme = config('prisma.theme', 'default');
+            $prefixVal = config('prisma.prefix');
+            $prefix = is_string($prefixVal) ? $prefixVal : 'prisma';
+            $themeVal = config('prisma.theme');
+            $theme = is_string($themeVal) ? $themeVal : 'default';
             return [
                 'item' => 'Archivo config/prisma.php',
                 'status' => 'ok',
@@ -261,7 +263,8 @@ class DoctorCommand extends Command
      */
     protected function checkComponentPrefixes(): array
     {
-        $prefix = (string) config('prisma.prefix', 'prisma');
+        $prefixVal = config('prisma.prefix');
+        $prefix = is_string($prefixVal) ? $prefixVal : 'prisma';
 
         return [
             'item' => 'Prefijo de Componentes',

@@ -41,7 +41,7 @@ return [
     'colors' => [
         'primary' => [
             'light' => [
-                'base' => '14 165 233',      // Sky 500
+                'base' => '3 105 161',       // Sky 700
                 'fg' => '255 255 255',
                 'border' => '2 132 199',     // Sky 600
                 'ring' => '56 189 248',      // Sky 400
@@ -56,9 +56,9 @@ return [
 
         'secondary' => [
             'light' => [
-                'base' => '100 116 139',     // Slate 500
+                'base' => '71 85 105',       // Slate 600
                 'fg' => '255 255 255',
-                'border' => '71 85 105',     // Slate 600
+                'border' => '51 65 85',      // Slate 700
                 'ring' => '148 163 184',     // Slate 400
             ],
             'dark' => [
@@ -71,7 +71,7 @@ return [
 
         'success' => [
             'light' => [
-                'base' => '16 185 129',      // Emerald 500
+                'base' => '4 120 87',        // Emerald 700
                 'fg' => '255 255 255',
                 'border' => '5 150 105',     // Emerald 600
                 'ring' => '52 211 153',      // Emerald 400
@@ -86,9 +86,9 @@ return [
 
         'danger' => [
             'light' => [
-                'base' => '239 68 68',       // Red 500
+                'base' => '220 38 38',       // Red 600
                 'fg' => '255 255 255',
-                'border' => '220 38 38',     // Red 600
+                'border' => '185 28 28',     // Red 700
                 'ring' => '248 113 113',     // Red 400
             ],
             'dark' => [
@@ -102,7 +102,7 @@ return [
         'warning' => [
             'light' => [
                 'base' => '245 158 11',      // Amber 500
-                'fg' => '255 255 255',
+                'fg' => '69 26 3',           // Amber 950
                 'border' => '217 119 6',     // Amber 600
                 'ring' => '251 191 36',      // Amber 400
             ],
@@ -116,7 +116,7 @@ return [
 
         'info' => [
             'light' => [
-                'base' => '6 182 212',       // Cyan 500
+                'base' => '14 116 144',      // Cyan 700
                 'fg' => '255 255 255',
                 'border' => '8 145 178',     // Cyan 600
                 'ring' => '34 211 238',      // Cyan 400
