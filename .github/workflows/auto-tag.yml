@@ -1,0 +1,42 @@
+name: Sequential Release Tagger (v1.0.*)
+
+on:
+  workflow_dispatch:
+    inputs:
+      custom_tag:
+        description: 'Tag personalizado opcional (dejar vacío para siguiente v1.0.* automático)'
+        required: false
+        default: ''
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Calculate and Push Sequential Tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [ -n "${{ github.event.inputs.custom_tag }}" ]; then
+            TAG="${{ github.event.inputs.custom_tag }}"
+          else
+            php bin/bump-tag.php
+            exit 0
+          fi
+          
+          echo "Creando tag $TAG..."
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
