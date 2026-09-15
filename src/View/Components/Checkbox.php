@@ -45,6 +45,9 @@ class Checkbox extends FormField
 
     public function render(): View
     {
-        return view('prisma::components.checkbox');
+        /** @var View $view */
+        $view = view('prisma::components.checkbox');
+
+        return $view;
     }
 }

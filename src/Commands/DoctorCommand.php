@@ -100,7 +100,9 @@ class DoctorCommand extends Command
      */
     protected function checkLaravelVersion(): array
     {
-        $version = app()->version();
+        /** @var \Illuminate\Contracts\Foundation\Application $app */
+        $app = app();
+        $version = $app->version();
         return [
             'item' => 'Framework Laravel',
             'status' => 'ok',

@@ -27,6 +27,9 @@ class Toast extends BaseComponent
 
     public function render(): View
     {
-        return view('prisma::components.toast');
+        /** @var View $view */
+        $view = view('prisma::components.toast');
+
+        return $view;
     }
 }
