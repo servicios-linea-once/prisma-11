@@ -55,6 +55,9 @@ class Input extends FormField
 
     public function render(): View
     {
-        return view('prisma::components.input');
+        /** @var View $view */
+        $view = view('prisma::components.input');
+
+        return $view;
     }
 }

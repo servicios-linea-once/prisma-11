@@ -70,6 +70,9 @@ class SwitchToggle extends FormField
 
     public function render(): View
     {
-        return view('prisma::components.switch');
+        /** @var View $view */
+        $view = view('prisma::components.switch');
+
+        return $view;
     }
 }

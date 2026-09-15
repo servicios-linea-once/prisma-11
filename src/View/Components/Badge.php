@@ -44,8 +44,11 @@ class Badge extends BaseComponent
 
     public function render(): View
     {
-        return view('prisma::components.badge', [
+        /** @var View $view */
+        $view = view('prisma::components.badge', [
             'classes' => $this->classes(),
         ]);
+
+        return $view;
     }
 }

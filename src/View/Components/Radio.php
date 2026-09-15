@@ -46,6 +46,9 @@ class Radio extends FormField
 
     public function render(): View
     {
-        return view('prisma::components.radio');
+        /** @var View $view */
+        $view = view('prisma::components.radio');
+
+        return $view;
     }
 }

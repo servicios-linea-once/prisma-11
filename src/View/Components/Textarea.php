@@ -53,6 +53,9 @@ class Textarea extends FormField
 
     public function render(): View
     {
-        return view('prisma::components.textarea');
+        /** @var View $view */
+        $view = view('prisma::components.textarea');
+
+        return $view;
     }
 }

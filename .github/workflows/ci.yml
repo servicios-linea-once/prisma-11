@@ -42,7 +42,7 @@ jobs:
           max_attempts: 3
           command: |
             composer require "illuminate/support:${{ matrix.laravel }}" "illuminate/view:${{ matrix.laravel }}" "illuminate/console:${{ matrix.laravel }}" --no-interaction --no-update
-            composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+            composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --with-all-dependencies
 
       - name: Execute PHPStan (Static Analysis - Level 9)
         run: ./vendor/bin/phpstan analyse --memory-limit=2G

@@ -41,8 +41,11 @@ class Alert extends BaseComponent
 
     public function render(): View
     {
-        return view('prisma::components.alert', [
+        /** @var View $view */
+        $view = view('prisma::components.alert', [
             'classes' => $this->classes(),
         ]);
+
+        return $view;
     }
 }

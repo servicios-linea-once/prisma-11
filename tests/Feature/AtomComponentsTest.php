@@ -54,8 +54,18 @@ class AtomComponentsTest extends TestCase
         $this->assertStringContainsString('text-primary', $rendered);
     }
 
-    public function test_icon_renders_registered_svg(): void
+    public function test_icon_renders_iconify_element(): void
     {
+        $rendered = Blade::render('<x-prisma-icon name="check" size="md" />');
+
+        $this->assertStringContainsString('<iconify-icon', $rendered);
+        $this->assertStringContainsString('icon="lucide:check"', $rendered);
+        $this->assertStringContainsString('aria-hidden="true"', $rendered);
+    }
+
+    public function test_icon_renders_registered_svg_fallback(): void
+    {
+        config(['prisma.icons.driver' => 'svg']);
         $rendered = Blade::render('<x-prisma-icon name="check" size="md" />');
 
         $this->assertStringContainsString('<svg', $rendered);

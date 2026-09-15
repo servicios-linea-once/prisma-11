@@ -33,6 +33,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Iconos (Integración Iconify)
+    |--------------------------------------------------------------------------
+    | Prisma 11 utiliza Iconify para ofrecer más de 200,000 iconos vectoriales.
+    | - driver: 'iconify' (Web Component <iconify-icon>) o 'svg' (SVG inline local).
+    | - default_set: Prefijo del conjunto predeterminado (ej: 'lucide', 'heroicons', 'tabler').
+    | - cdn: Script del Web Component de Iconify inyectado en @prismaScripts.
+    */
+    'icons' => [
+        'driver' => env('PRISMA_ICON_DRIVER', 'iconify'),
+        'default_set' => env('PRISMA_ICON_SET', 'lucide'),
+        'cdn' => env('PRISMA_ICON_CDN', 'https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Matriz de Tokens Semánticos Bipolares (Claro / Oscuro)
     |--------------------------------------------------------------------------
     | Cada token define canales RGB puros ('base', 'fg', 'border', 'ring')

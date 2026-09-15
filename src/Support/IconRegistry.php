@@ -59,4 +59,20 @@ class IconRegistry
             default => 'w-5 h-5',
         };
     }
+
+    /**
+     * Resuelve el identificador de Iconify considerando el prefijo de conjunto predeterminado.
+     */
+    public static function resolveIconName(string $name): string
+    {
+        if (str_contains($name, ':')) {
+            return $name;
+        }
+
+        $defaultSet = config('prisma.icons.default_set');
+        $set = is_string($defaultSet) && $defaultSet !== '' ? $defaultSet : 'lucide';
+
+        return "{$set}:{$name}";
+    }
 }
+
