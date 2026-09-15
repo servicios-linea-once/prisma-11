@@ -9,13 +9,14 @@ use Illuminate\Contracts\View\View;
 class Spinner extends BaseComponent
 {
     public function __construct(
-        public string $size = 'md',
-        public string $color = 'primary',
+        public ?string $size = null,
+        public ?string $color = null,
     ) {}
 
     public function sizeClasses(): string
     {
-        return match ($this->size) {
+        $sizeKey = $this->size ?? 'md';
+        return match ($sizeKey) {
             'xs' => 'w-3 h-3',
             'sm' => 'w-4 h-4',
             'lg' => 'w-8 h-8',
@@ -26,10 +27,19 @@ class Spinner extends BaseComponent
 
     public function colorClasses(): string
     {
-        if ($this->color === 'current') {
+        $colorKey = $this->color ?? 'primary';
+        if ($colorKey === 'current') {
             return 'text-current';
         }
-        return "text-{$this->color}";
+
+        return match ($colorKey) {
+            'success', 'green' => 'text-green-600',
+            'danger', 'red' => 'text-red-600',
+            'warning', 'yellow' => 'text-yellow-500',
+            'info', 'blue' => 'text-blue-600',
+            'dark', 'gray' => 'text-gray-900 dark:text-gray-100',
+            default => "text-{$colorKey}",
+        };
     }
 
     public function classes(): string
@@ -43,9 +53,21 @@ class Spinner extends BaseComponent
 
     public function render(): View
     {
+        $resolved = $this->resolveModifiers([
+            'color' => $this->color,
+            'size' => $this->size,
+            'defaultColor' => 'primary',
+            'defaultSize' => 'md',
+        ]);
+
+        $this->color = $resolved['color'];
+        $this->size = $resolved['size'];
+
         /** @var View $view */
         $view = view('prisma::components.spinner', [
             'classes' => $this->classes(),
+            'color' => $this->color,
+            'size' => $this->size,
         ]);
 
         return $view;

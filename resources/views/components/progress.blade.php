@@ -1,22 +1,33 @@
 @props([
     'value' => 0,
-    'color' => 'blue',
-    'size' => 'md',
+    'color' => null,
+    'size' => null,
     'label' => null,
     'showPercent' => false,
 ])
 
 @php
+    $resolved = \ServicioLineaOnce\Prisma11\Support\ComponentModifiers::resolve($attributes, [
+        'color' => $color,
+        'size' => $size,
+        'defaultColor' => 'primary',
+        'defaultSize' => 'md',
+    ]);
+    $color = $resolved['color'];
+    $size = $resolved['size'];
+    $attributes = $resolved['attributes'];
+
     $colorClass = match($color) {
         'green', 'success' => 'bg-green-600',
         'red', 'danger' => 'bg-red-600',
         'yellow', 'warning' => 'bg-yellow-400',
         'purple' => 'bg-purple-600',
         'dark', 'gray' => 'bg-gray-600',
-        default => 'bg-blue-600',
+        default => 'bg-primary',
     };
 
     $sizeClass = match($size) {
+        'xs' => 'h-1',
         'sm' => 'h-1.5',
         'lg' => 'h-4',
         'xl' => 'h-6',
@@ -24,7 +35,7 @@
     };
 @endphp
 
-<div class="w-full">
+<div {{ $attributes->merge(['class' => 'w-full']) }}>
     @if($label || $showPercent)
         <div class="flex justify-between mb-1">
             @if($label)

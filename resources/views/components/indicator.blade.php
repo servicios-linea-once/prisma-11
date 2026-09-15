@@ -1,18 +1,32 @@
 @props([
-    'color' => 'blue',
-    'size' => 'md',
+    'color' => null,
+    'size' => null,
     'ping' => false,
     'placement' => null,
 ])
 
 @php
+    $resolved = \ServicioLineaOnce\Prisma11\Support\ComponentModifiers::resolve($attributes, [
+        'color' => $color,
+        'size' => $size,
+        'defaultColor' => 'primary',
+        'defaultSize' => 'md',
+    ]);
+    $color = $resolved['color'];
+    $size = $resolved['size'];
+    $attributes = $resolved['attributes'];
+    if ($attributes->has('ping')) {
+        $ping = true;
+        $attributes = $attributes->except('ping');
+    }
+
     $colorClass = match($color) {
         'red', 'danger' => 'bg-red-500',
         'green', 'success' => 'bg-green-500',
         'yellow', 'warning' => 'bg-yellow-400',
         'gray', 'dark' => 'bg-gray-500',
         'purple' => 'bg-purple-500',
-        default => 'bg-blue-600',
+        default => 'bg-primary',
     };
 
     $sizeClass = match($size) {

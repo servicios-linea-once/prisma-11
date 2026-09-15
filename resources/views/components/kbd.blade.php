@@ -1,8 +1,15 @@
 @props([
-    'size' => 'md',
+    'size' => null,
 ])
 
 @php
+    $resolved = \ServicioLineaOnce\Prisma11\Support\ComponentModifiers::resolve($attributes, [
+        'size' => $size,
+        'defaultSize' => 'md',
+    ]);
+    $size = $resolved['size'];
+    $attributes = $resolved['attributes'];
+
     $sizeClass = match($size) {
         'xs' => 'px-1.5 py-0.5 text-xs',
         'sm' => 'px-2 py-1 text-xs',

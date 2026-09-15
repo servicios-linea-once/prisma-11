@@ -26,7 +26,68 @@ class ColorTokens
     }
 
     /**
-     * Genera el bloque CSS con las variables semánticas para modo claro y oscuro.
+     * Devuelve la configuración de los 5 temas oficiales de Prisma 11.
+     *
+     * @return array<string, array{name: string, primary: string, primary-fg: string, primary-border: string, primary-ring: string, theme-bg: string, theme-surface: string, theme-text: string}>
+     */
+    public static function themes(): array
+    {
+        return [
+            'default' => [
+                'name' => 'Default',
+                'primary' => '22 163 74',
+                'primary-fg' => '255 255 255',
+                'primary-border' => '21 128 61',
+                'primary-ring' => '34 197 94',
+                'theme-bg' => '249 250 251',
+                'theme-surface' => '255 255 255',
+                'theme-text' => '17 24 39',
+            ],
+            'retro' => [
+                'name' => 'Retro',
+                'primary' => '239 153 149',
+                'primary-fg' => '40 36 37',
+                'primary-border' => '220 130 125',
+                'primary-ring' => '245 175 170',
+                'theme-bg' => '236 227 202',
+                'theme-surface' => '228 217 185',
+                'theme-text' => '40 36 37',
+            ],
+            'cyberpunk' => [
+                'name' => 'Cyberpunk',
+                'primary' => '255 117 152',
+                'primary-fg' => '0 0 0',
+                'primary-border' => '0 0 0',
+                'primary-ring' => '0 240 255',
+                'theme-bg' => '255 238 0',
+                'theme-surface' => '245 225 0',
+                'theme-text' => '0 0 0',
+            ],
+            'valentine' => [
+                'name' => 'Valentine',
+                'primary' => '233 109 123',
+                'primary-fg' => '255 255 255',
+                'primary-border' => '215 90 105',
+                'primary-ring' => '245 140 155',
+                'theme-bg' => '240 214 232',
+                'theme-surface' => '248 230 242',
+                'theme-text' => '99 43 78',
+            ],
+            'aqua' => [
+                'name' => 'Aqua',
+                'primary' => '0 215 192',
+                'primary-fg' => '9 44 62',
+                'primary-border' => '0 185 165',
+                'primary-ring' => '50 235 215',
+                'theme-bg' => '9 44 62',
+                'theme-surface' => '16 60 82',
+                'theme-text' => '240 250 255',
+            ],
+        ];
+    }
+
+    /**
+     * Genera el bloque CSS con las variables semánticas para modo claro, oscuro y los 5 temas oficiales.
      */
     public static function generateCssVariables(): string
     {
@@ -56,7 +117,37 @@ class ColorTokens
         $lightCss .= "}\n";
         $darkCss .= "}\n";
 
-        return $lightCss . "\n" . $darkCss;
+        // Bloques CSS para los 5 temas
+        $themesCss = "";
+        foreach (self::themes() as $key => $values) {
+            $selector = $key === 'default'
+                ? ":root, [data-theme=\"{$key}\"]"
+                : "[data-theme=\"{$key}\"]";
+
+            $themesCss .= "{$selector} {\n";
+            $themesCss .= "  --p11-primary: {$values['primary']};\n";
+            $themesCss .= "  --p11-primary-fg: {$values['primary-fg']};\n";
+            $themesCss .= "  --p11-primary-border: {$values['primary-border']};\n";
+            $themesCss .= "  --p11-primary-ring: {$values['primary-ring']};\n";
+            $themesCss .= "  --p11-theme-bg: {$values['theme-bg']};\n";
+            $themesCss .= "  --p11-theme-surface: {$values['theme-surface']};\n";
+            $themesCss .= "  --p11-theme-text: {$values['theme-text']};\n";
+            $themesCss .= "}\n\n";
+        }
+
+        // Utilidades de apoyo a temas
+        $utilsCss = <<<CSS
+.bg-primary { background-color: rgb(var(--p11-primary)) !important; }
+.text-primary { color: rgb(var(--p11-primary)) !important; }
+.text-primary-fg { color: rgb(var(--p11-primary-fg)) !important; }
+.border-primary-border { border-color: rgb(var(--p11-primary-border)) !important; }
+.ring-primary-ring { --tw-ring-color: rgb(var(--p11-primary-ring)) !important; }
+[data-theme] {
+  color: rgb(var(--p11-theme-text, 17 24 39));
+}
+CSS;
+
+        return $lightCss . "\n" . $darkCss . "\n" . $themesCss . "\n" . $utilsCss;
     }
 
     /**

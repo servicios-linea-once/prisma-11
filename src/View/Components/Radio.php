@@ -46,6 +46,12 @@ class Radio extends FormField
 
     public function render(): View
     {
+        $resolved = $this->resolveModifiers([
+            'color' => $this->color === 'primary' ? null : $this->color,
+            'defaultColor' => 'primary',
+        ]);
+        $this->color = $resolved['color'];
+
         /** @var View $view */
         $view = view('prisma::components.radio');
 

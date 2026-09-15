@@ -33,6 +33,7 @@
             <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 font-semibold">UI Components</span>
         </div>
         <div class="flex items-center gap-3">
+            <x-p11-theme-selector />
             <button
                 type="button"
                 @click="darkMode = !darkMode"
@@ -95,13 +96,14 @@
                 <h2 class="text-2xl font-bold">Buttons, Button Groups & KBD</h2>
                 <div class="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 space-y-4">
                     <div class="flex flex-wrap gap-3 items-center">
-                        <x-p11-button color="primary">Primary (Blue)</x-p11-button>
-                        <x-p11-button color="alternative">Alternative (White)</x-p11-button>
-                        <x-p11-button color="success">Success (Green)</x-p11-button>
-                        <x-p11-button color="danger">Danger (Red)</x-p11-button>
-                        <x-p11-button color="warning">Warning (Yellow)</x-p11-button>
-                        <x-p11-button color="primary" rounded="full">Pill Button</x-p11-button>
-                        <x-p11-button color="primary" :loading="true">Cargando</x-p11-button>
+                        <x-p11-button success sm solid>Procesando</x-p11-button>
+                        <x-p11-button danger sm outline>Eliminar</x-p11-button>
+                        <x-p11-button warning sm>Advertencia</x-p11-button>
+                        <x-p11-button info sm pill>Info Pill</x-p11-button>
+                        <x-p11-button alternative sm>Alternativo</x-p11-button>
+                        <x-p11-button dark sm>Oscuro</x-p11-button>
+                        <x-p11-button sm :loading="true">Cargando</x-p11-button>
+                        <x-p11-button sm>Tema Dinámico</x-p11-button>
                     </div>
                     <div class="pt-2 flex flex-wrap gap-4 items-center">
                         <span class="text-sm font-medium">Button Group:</span>
@@ -133,16 +135,16 @@
                 <h2 class="text-2xl font-bold">Badges, Avatars & Indicators</h2>
                 <div class="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-wrap gap-6 items-center">
                     <div class="flex flex-wrap gap-2">
-                        <x-p11-badge color="primary">Default</x-p11-badge>
-                        <x-p11-badge color="success">Green</x-p11-badge>
-                        <x-p11-badge color="danger">Red</x-p11-badge>
-                        <x-p11-badge color="warning">Yellow</x-p11-badge>
-                        <x-p11-badge color="indigo">Indigo</x-p11-badge>
+                        <x-p11-badge success sm pill>Activo</x-p11-badge>
+                        <x-p11-badge danger sm pill>Error</x-p11-badge>
+                        <x-p11-badge warning sm pill>Pendiente</x-p11-badge>
+                        <x-p11-badge info sm pill>Nuevo</x-p11-badge>
+                        <x-p11-badge sm>Tema</x-p11-badge>
                     </div>
                     <div class="flex items-center gap-4">
                         <div class="relative">
                             <x-p11-avatar initials="JS" size="md" />
-                            <x-p11-indicator color="green" ping="true" placement="top-right" />
+                            <x-p11-indicator success ping sm placement="top-right" />
                         </div>
                         <x-p11-rating rating="4" max="5" count="48" score="4.9" />
                     </div>
@@ -153,9 +155,9 @@
             <section id="alerts" class="space-y-4">
                 <h2 class="text-2xl font-bold">Alerts & Banner</h2>
                 <div class="space-y-3">
-                    <x-p11-alert color="info" :dismissible="true">Información: Componentes nativos de Prisma 11.</x-p11-alert>
-                    <x-p11-alert color="success" :dismissible="true">Éxito: Prefijo dinámico y motor de iconos Iconify activos.</x-p11-alert>
-                    <x-p11-alert color="warning" :dismissible="true">Advertencia: Recuerda registrar la ruta en tailwind.config.js.</x-p11-alert>
+                    <x-p11-alert info dismissible>Información: Componentes nativos de Prisma 11.</x-p11-alert>
+                    <x-p11-alert success dismissible>Éxito: Modificadores booleanos activos y limpios.</x-p11-alert>
+                    <x-p11-alert warning dismissible>Advertencia: Sistema multi-tema activo en tiempo real.</x-p11-alert>
                 </div>
             </section>
 

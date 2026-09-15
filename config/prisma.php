@@ -20,6 +20,13 @@ return [
     | 'light' | 'dark' | 'system'
     */
     'theme' => env('PRISMA_THEME', 'default'),
+    'themes' => [
+        'default' => 'Default',
+        'retro' => 'Retro',
+        'cyberpunk' => 'Cyberpunk',
+        'valentine' => 'Valentine',
+        'aqua' => 'Aqua',
+    ],
     'mode' => env('PRISMA_MODE', 'system'),
 
     /*

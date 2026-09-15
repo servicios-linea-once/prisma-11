@@ -4,12 +4,48 @@
     'title' => null,
     'icon' => null,
     'dismissible' => false,
+    'variant' => 'subtle',
 ])
+
+@php
+    if ($attributes->has('dismissible')) {
+        $dismissible = true;
+        $attributes = $attributes->except('dismissible');
+    }
+
+    $resolved = \ServicioLineaOnce\Prisma11\Support\ComponentModifiers::resolve($attributes, [
+        'color' => $color === 'info' ? null : $color,
+        'variant' => $variant === 'subtle' ? null : $variant,
+        'defaultColor' => 'info',
+        'defaultVariant' => 'subtle',
+    ]);
+    $color = $resolved['color'];
+    $variant = $resolved['variant'];
+    $attributes = $resolved['attributes'];
+
+    if ($icon === null || ($icon === 'info' && $color !== 'info')) {
+        $icon = match ($color) {
+            'success', 'green' => 'check-circle',
+            'danger', 'red' => 'alert-circle',
+            'warning', 'yellow' => 'alert-triangle',
+            'info', 'blue' => 'info',
+            default => 'info',
+        };
+    }
+
+    $computedClasses = isset($component) && method_exists($component, 'computeClasses')
+        ? $component->computeClasses($color, $variant)
+        : $classes;
+
+    $finalClasses = $attributes->get('class')
+        ? (isset($component) ? $component->mergeClasses($computedClasses, $attributes->get('class')) : "{$computedClasses} " . $attributes->get('class'))
+        : $computedClasses;
+@endphp
 
 <div
     @if ($dismissible) x-data="{ show: true }" x-show="show" x-transition.duration.200ms @endif
     role="alert"
-    {{ $attributes->except('class')->merge(['class' => $classes]) }}
+    {{ $attributes->except('class')->merge(['class' => $finalClasses]) }}
 >
     @if ($icon)
         <div class="shrink-0 text-{{ $color }} mt-0.5">

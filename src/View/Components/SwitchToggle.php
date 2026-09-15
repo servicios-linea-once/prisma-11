@@ -70,6 +70,15 @@ class SwitchToggle extends FormField
 
     public function render(): View
     {
+        $resolved = $this->resolveModifiers([
+            'color' => $this->color === 'primary' ? null : $this->color,
+            'size' => $this->size === 'md' ? null : $this->size,
+            'defaultColor' => 'primary',
+            'defaultSize' => 'md',
+        ]);
+        $this->color = $resolved['color'];
+        $this->size = $resolved['size'];
+
         /** @var View $view */
         $view = view('prisma::components.switch');
 
