@@ -10,7 +10,7 @@ return [
     | Define el prefijo usado para invocar los componentes en Blade.
     | Opciones recomendadas: 'prisma' (<x-prisma-button>) o 'p11' (<x-p11-button>).
     */
-    'prefix' => env('PRISMA_PREFIX', 'prisma'),
+    'prefix' => env('PRISMA_PREFIX', 'p11'),
 
     /*
     |--------------------------------------------------------------------------

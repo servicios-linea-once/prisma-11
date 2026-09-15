@@ -120,6 +120,10 @@ class PrismaServiceProvider extends ServiceProvider
                 __DIR__ . '/../resources/css' => resource_path('css/vendor/prisma'),
                 __DIR__ . '/../resources/js' => resource_path('js/vendor/prisma'),
             ], 'prisma-assets');
+
+            $this->publishes([
+                __DIR__ . '/../tailwind.preset.js' => base_path('tailwind.preset.js'),
+            ], 'prisma-tailwind');
         }
     }
 

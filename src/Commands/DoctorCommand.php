@@ -214,10 +214,22 @@ class DoctorCommand extends Command
         }
 
         if ($hasV3Config) {
+            $configFilename = file_exists("{$base}/tailwind.config.js") ? "{$base}/tailwind.config.js" :
+                (file_exists("{$base}/tailwind.config.ts") ? "{$base}/tailwind.config.ts" : "{$base}/tailwind.config.cjs");
+            $configContent = (string) file_get_contents($configFilename);
+
+            if (str_contains($configContent, 'servicio-linea-once/prisma-11') || str_contains($configContent, 'prisma-11')) {
+                return [
+                    'item' => 'Tailwind CSS',
+                    'status' => 'ok',
+                    'details' => 'Tailwind CSS v3 detectado y escaneando vistas de Prisma 11 en content.',
+                ];
+            }
+
             return [
                 'item' => 'Tailwind CSS',
-                'status' => 'ok',
-                'details' => 'Tailwind CSS v3 detectado (tailwind.config.* presente).',
+                'status' => 'warn',
+                'details' => 'Tailwind v3 detectado. Recuerda agregar "./vendor/servicio-linea-once/prisma-11/resources/views/**/*.blade.php" en content de tailwind.config.js para compilar estilos.',
             ];
         }
 

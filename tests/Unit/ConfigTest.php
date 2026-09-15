@@ -11,7 +11,7 @@ class ConfigTest extends TestCase
     public function test_default_configuration_is_loaded(): void
     {
         $this->assertNotNull(config('prisma'));
-        $this->assertEquals('prisma', config('prisma.prefix'));
+        $this->assertEquals('p11', config('prisma.prefix'));
         $this->assertEquals('default', config('prisma.theme'));
         $this->assertArrayHasKey('colors', config('prisma'));
         $this->assertArrayHasKey('primary', config('prisma.colors'));

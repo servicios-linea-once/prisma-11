@@ -1,0 +1,22 @@
+@props([
+    'title' => null,
+    'description' => null,
+])
+
+<section {{ $attributes->merge(['class' => 'bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800']) }}>
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+        @if($title)
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                {{ $title }}
+            </h1>
+        @endif
+        @if($description)
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
+                {{ $description }}
+            </p>
+        @endif
+        <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            {{ $slot }}
+        </div>
+    </div>
+</section>

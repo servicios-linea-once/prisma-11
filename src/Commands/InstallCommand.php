@@ -80,14 +80,14 @@ class InstallCommand extends Command
                 $selected = select(
                     label: 'Selecciona el prefijo para los componentes Blade:',
                     options: [
-                        'prisma' => 'Estándar didáctico: <x-prisma-button>',
                         'p11' => 'Ultra compacto: <x-p11-button>',
+                        'prisma' => 'Estándar didáctico: <x-prisma-button>',
                     ],
-                    default: 'prisma'
+                    default: 'p11'
                 );
-                $prefix = is_string($selected) ? $selected : 'prisma';
+                $prefix = is_string($selected) ? $selected : 'p11';
             } else {
-                $prefix = 'prisma';
+                $prefix = 'p11';
             }
         }
 
@@ -123,7 +123,18 @@ class InstallCommand extends Command
             file_put_contents($configPath, $content);
         }
 
-        // 6. Resumen didáctico
+        // 6. Verificar y sugerir contenido de Tailwind CSS
+        $tailwindFile = base_path('tailwind.config.js');
+        if (file_exists($tailwindFile)) {
+            $twContent = (string) file_get_contents($tailwindFile);
+            if (!str_contains($twContent, 'prisma-11')) {
+                $this->warn('Para que Tailwind no purgue las clases de Flowbite, agrega a content en tailwind.config.js:');
+                $this->line("  './vendor/servicio-linea-once/prisma-11/resources/views/**/*.blade.php',");
+                $this->line("  './vendor/servicio-linea-once/prisma-11/src/**/*.php',");
+            }
+        }
+
+        // 7. Resumen didáctico
         if ($isInteractive && function_exists('Laravel\Prompts\table')) {
             /** @var array<int, array<int, string>> $rows */
             $rows = [
