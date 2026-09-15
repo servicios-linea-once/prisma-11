@@ -128,7 +128,7 @@ class InstallCommand extends Command
         if (file_exists($tailwindFile)) {
             $twContent = (string) file_get_contents($tailwindFile);
             if (!str_contains($twContent, 'prisma-11')) {
-                $this->warn('Para que Tailwind no purgue las clases de Flowbite, agrega a content en tailwind.config.js:');
+                $this->warn('Para que Tailwind no purgue las clases de Prisma 11, agrega a content en tailwind.config.js:');
                 $this->line("  './vendor/servicio-linea-once/prisma-11/resources/views/**/*.blade.php',");
                 $this->line("  './vendor/servicio-linea-once/prisma-11/src/**/*.php',");
             }

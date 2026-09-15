@@ -7,7 +7,7 @@ namespace ServicioLineaOnce\Prisma11\Tests\Feature;
 use Illuminate\Support\Facades\Blade;
 use ServicioLineaOnce\Prisma11\Tests\TestCase;
 
-class FlowbiteComponentsTest extends TestCase
+class Prisma11ComponentsTest extends TestCase
 {
     public function test_button_group_renders_correctly(): void
     {
@@ -36,7 +36,7 @@ class FlowbiteComponentsTest extends TestCase
 
     public function test_qr_code_renders_correctly(): void
     {
-        $rendered = Blade::render('<x-p11-qr-code value="https://flowbite.com" title="Escanear" />');
+        $rendered = Blade::render('<x-p11-qr-code value="https://github.com/servicios-linea-once/prisma-11" title="Escanear" />');
 
         $this->assertStringContainsString('qrserver.com', $rendered);
         $this->assertStringContainsString('Escanear', $rendered);
@@ -201,9 +201,9 @@ class FlowbiteComponentsTest extends TestCase
 
     public function test_clipboard_renders_correctly(): void
     {
-        $rendered = Blade::render('<x-p11-clipboard value="npm i flowbite" />');
+        $rendered = Blade::render('<x-p11-clipboard value="composer require servicio-linea-once/prisma-11" />');
 
-        $this->assertStringContainsString('npm i flowbite', $rendered);
+        $this->assertStringContainsString('composer require servicio-linea-once/prisma-11', $rendered);
         $this->assertStringContainsString('navigator.clipboard.writeText', $rendered);
     }
 
@@ -315,7 +315,7 @@ class FlowbiteComponentsTest extends TestCase
         $p = Blade::render('<x-p11-paragraph variant="lead">Párrafo destacado</x-p11-paragraph>');
         $quote = Blade::render('<x-p11-blockquote author="Steve Jobs">Innovación</x-p11-blockquote>');
         $hr = Blade::render('<x-p11-hr text="O continuar con" />');
-        $link = Blade::render('<x-p11-link href="https://flowbite.com">Flowbite</x-p11-link>');
+        $link = Blade::render('<x-p11-link href="https://github.com/servicios-linea-once/prisma-11">Prisma 11</x-p11-link>');
         $text = Blade::render('<x-p11-text variant="highlight">Importante</x-p11-text>');
 
         $this->assertStringContainsString('<h1', $h);
@@ -323,7 +323,8 @@ class FlowbiteComponentsTest extends TestCase
         $this->assertStringContainsString('text-xl font-normal', $p);
         $this->assertStringContainsString('Steve Jobs', $quote);
         $this->assertStringContainsString('O continuar con', $hr);
-        $this->assertStringContainsString('href="https://flowbite.com"', $link);
+        $this->assertStringContainsString('href="https://github.com/servicios-linea-once/prisma-11"', $link);
+        $this->assertStringContainsString('Prisma 11', $link);
         $this->assertStringContainsString('bg-blue-600', $text);
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prisma 11 — Flowbite Design System Showcase</title>
+    <title>Prisma 11 — Showcase Interactivo</title>
     @prismaStyles
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -30,7 +30,7 @@
     <header class="sticky top-0 z-40 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center justify-between shadow-xs">
         <div class="flex items-center gap-3">
             <span class="text-xl font-bold text-blue-600 dark:text-blue-500">Prisma 11</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 font-semibold">Flowbite Edition</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 font-semibold">UI Components</span>
         </div>
         <div class="flex items-center gap-3">
             <button
@@ -46,7 +46,7 @@
     </header>
 
     <div class="flex-1 flex overflow-hidden">
-        <!-- Flowbite Exact Sidebar matching the 4 user images -->
+        <!-- Prisma 11 Sidebar -->
         <aside class="w-64 border-e border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-y-auto p-4 hidden md:block shrink-0">
             <nav class="space-y-6 text-sm">
                 <!-- COMPONENTS -->
@@ -153,13 +153,13 @@
             <section id="alerts" class="space-y-4">
                 <h2 class="text-2xl font-bold">Alerts & Banner</h2>
                 <div class="space-y-3">
-                    <x-p11-alert color="info" :dismissible="true">Información: Componentes alineados al 100% con Flowbite.</x-p11-alert>
+                    <x-p11-alert color="info" :dismissible="true">Información: Componentes nativos de Prisma 11.</x-p11-alert>
                     <x-p11-alert color="success" :dismissible="true">Éxito: Prefijo dinámico y motor de iconos Iconify activos.</x-p11-alert>
                     <x-p11-alert color="warning" :dismissible="true">Advertencia: Recuerda registrar la ruta en tailwind.config.js.</x-p11-alert>
                 </div>
             </section>
 
-            <!-- Forms Flowbite / Formularios Inteligentes -->
+            <!-- Forms / Formularios Inteligentes -->
             <section id="forms" class="space-y-4">
                 <h2 class="text-2xl font-bold">Formularios Inteligentes</h2>
                 <div class="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -203,7 +203,7 @@
                         <h4 class="font-bold">Timeline de Eventos:</h4>
                         <x-p11-timeline>
                             <x-p11-timeline-item date="Septiembre 2026" title="Lanzamiento Prisma 11">
-                                Lanzamiento inicial con más de 66 componentes Flowbite.
+                                Lanzamiento inicial con más de 66 componentes de Prisma 11.
                             </x-p11-timeline-item>
                             <x-p11-timeline-item date="Octubre 2026" title="Integración Iconify">
                                 Acceso nativo a más de 200,000 iconos vectoriales.
@@ -214,7 +214,7 @@
                         <h4 class="font-bold">Copiado al Portapapeles & QR:</h4>
                         <div class="flex flex-col gap-4 items-center">
                             <x-p11-clipboard value="composer require servicio-linea-once/prisma-11" />
-                            <x-p11-qr-code value="https://flowbite.com" title="Escanea para ver Flowbite" size="sm" />
+                            <x-p11-qr-code value="https://github.com/servicios-linea-once/prisma-11" title="Escanea para ver Prisma 11" size="sm" />
                         </div>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
         </main>
     </div>
 
-    <!-- Flowbite Footer -->
+    <!-- Prisma 11 Footer -->
     <x-p11-footer brand="Prisma 11">
         <li><a href="#buttons" class="hover:underline me-4 md:me-6">Botones</a></li>
         <li><a href="#forms" class="hover:underline me-4 md:me-6">Formularios</a></li>
