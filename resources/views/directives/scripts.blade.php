@@ -17,3 +17,8 @@
 <script id="prisma-store">
 {!! \ServicioLineaOnce\Prisma11\Support\PrismaAssets::storeScript() !!}
 </script>
+
+@if(config('prisma.icons.driver', 'iconify') === 'iconify' && config('prisma.icons.cdn'))
+<script id="prisma-iconify" src="{{ config('prisma.icons.cdn') }}" defer></script>
+@endif
+

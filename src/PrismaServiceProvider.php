@@ -57,7 +57,7 @@ class PrismaServiceProvider extends ServiceProvider
     protected function registerBladeComponents(): void
     {
         $prefixVal = config('prisma.prefix');
-        $prefix = is_string($prefixVal) ? $prefixVal : 'prisma';
+        $prefix = is_string($prefixVal) && $prefixVal !== '' ? $prefixVal : 'prisma';
 
         $components = [
             'button' => \ServicioLineaOnce\Prisma11\View\Components\Button::class,
@@ -74,10 +74,12 @@ class PrismaServiceProvider extends ServiceProvider
             'toast' => \ServicioLineaOnce\Prisma11\View\Components\Toast::class,
         ];
 
-        foreach ($components as $alias => $class) {
-            Blade::component($class, "{$prefix}-{$alias}");
-            if ($prefix === 'prisma') {
-                Blade::component($class, "p11-{$alias}");
+        // Coexistencia de prefijo configurado, canónico 'prisma' y alias 'p11'
+        $prefixes = array_values(array_unique(array_filter([$prefix, 'prisma', 'p11'])));
+
+        foreach ($prefixes as $p) {
+            foreach ($components as $alias => $class) {
+                Blade::component($class, "{$p}-{$alias}");
             }
         }
 
@@ -88,9 +90,8 @@ class PrismaServiceProvider extends ServiceProvider
             foreach ($files as $file) {
                 $name = basename($file, '.blade.php');
                 if (!isset($components[$name])) {
-                    Blade::component("prisma::components.{$name}", "{$prefix}-{$name}");
-                    if ($prefix === 'prisma') {
-                        Blade::component("prisma::components.{$name}", "p11-{$name}");
+                    foreach ($prefixes as $p) {
+                        Blade::component("prisma::components.{$name}", "{$p}-{$name}");
                     }
                 }
             }

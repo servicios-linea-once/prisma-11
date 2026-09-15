@@ -13,7 +13,14 @@ class Icon extends BaseComponent
         public string $name,
         public string $size = 'md',
         public string $color = 'current',
+        public ?string $flip = null,
+        public ?string $rotate = null,
     ) {}
+
+    public function iconName(): string
+    {
+        return IconRegistry::resolveIconName($this->name);
+    }
 
     public function svgContent(): ?string
     {
@@ -36,7 +43,7 @@ class Icon extends BaseComponent
     public function classes(): string
     {
         return $this->mergeClasses(
-            'inline-block shrink-0',
+            'inline-block shrink-0 align-middle',
             $this->sizeClasses(),
             $this->colorClasses()
         );
@@ -46,8 +53,12 @@ class Icon extends BaseComponent
     {
         /** @var View $view */
         $view = view('prisma::components.icon', [
+            'name' => $this->name,
+            'iconName' => $this->iconName(),
             'classes' => $this->classes(),
             'svgContent' => $this->svgContent(),
+            'flip' => $this->flip,
+            'rotate' => $this->rotate,
         ]);
 
         return $view;

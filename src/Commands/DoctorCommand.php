@@ -35,6 +35,7 @@ class DoctorCommand extends Command
             $this->checkLivewire(),
             $this->checkAlpine(),
             $this->checkComponentPrefixes(),
+            $this->checkIconEngine(),
         ];
 
         $tableRows = [];
@@ -266,12 +267,29 @@ class DoctorCommand extends Command
     protected function checkComponentPrefixes(): array
     {
         $prefixVal = config('prisma.prefix');
-        $prefix = is_string($prefixVal) ? $prefixVal : 'prisma';
+        $prefix = is_string($prefixVal) && $prefixVal !== '' ? $prefixVal : 'prisma';
 
         return [
             'item' => 'Prefijo de Componentes',
             'status' => 'ok',
-            'details' => "Prefijo activo: '<x-{$prefix}-*>' y alias corto '<x-p11-*>'",
+            'details' => "Prefijo activo: '<x-{$prefix}-*>' (alias '<x-p11-*>', '<x-prisma-*>')",
+        ];
+    }
+
+    /**
+     * @return array{item: string, status: 'ok'|'warn'|'error', details: string}
+     */
+    protected function checkIconEngine(): array
+    {
+        $driverVal = config('prisma.icons.driver');
+        $driver = is_string($driverVal) ? $driverVal : 'iconify';
+        $setVal = config('prisma.icons.default_set');
+        $set = is_string($setVal) ? $setVal : 'lucide';
+
+        return [
+            'item' => 'Motor de Iconos',
+            'status' => 'ok',
+            'details' => "Driver: '{$driver}', Colección por defecto: '{$set}' (Iconify integrado)",
         ];
     }
 }
